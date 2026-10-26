@@ -26,7 +26,7 @@
 | [Adobe / Spectrum](references/styles/adobe-spectrum/DESIGN.md) `adobe-spectrum` | [HTML](examples/preview/styles/adobe-spectrum/zh-CN/index.html) · [PDF](examples/preview/styles/adobe-spectrum/zh-CN/resume.pdf) | [HTML](examples/preview/styles/adobe-spectrum/en/index.html) · [PDF](examples/preview/styles/adobe-spectrum/en/resume.pdf) |
 | [Salesforce / Lightning](references/styles/salesforce-lightning/DESIGN.md) `salesforce-lightning` | [HTML](examples/preview/styles/salesforce-lightning/zh-CN/index.html) · [PDF](examples/preview/styles/salesforce-lightning/zh-CN/resume.pdf) | [HTML](examples/preview/styles/salesforce-lightning/en/index.html) · [PDF](examples/preview/styles/salesforce-lightning/en/resume.pdf) |
 
-完整桌面、移动端及每一页 PDF 截图保存在对应预览目录；[检查记录](docs/preview-checks.json)记录 24 组风格预览和 6 组职业预览的几何检查。[公共设计规则](DESIGN.md)链接到各风格的官方来源、采集日期、设计原则、排版 token 及项目改编说明。网上现成 DESIGN.md 的检索结果也在其中说明，未直接复制第三方规范。
+完整桌面、移动端及每一页 PDF 截图保存在对应预览目录。[公共设计规则](DESIGN.md)链接到各风格的官方来源、采集日期、设计原则、排版 token 及项目改编说明。网上现成 DESIGN.md 的检索结果也在其中说明，未直接复制第三方规范。
 
 ## 安装与迁移
 
@@ -97,15 +97,11 @@ python scripts/prepare_pdf.py resume.pdf --output output/pdf-input
 
 新增 [12 份职业 Markdown](examples/profiles)，对应 6 位虚构人物的中英文版本。另有 [职业预览](examples/preview/careers)：应届生、前端、后端、产品、设计、数据；包含无经历、多雇主、长文本、长链接和未知章节。[6 个公开来源与样本溯源](references/sample-sources.md)仅作为结构参考，未复制真实履历和个人信息。实际用户输入及输出不会自动脱敏。
 
-## 开发与验证
+## 重建示例
 
 ```bash
-python -m unittest discover -s tests -v
-# 重建示例需开发依赖及 Chromium
 python -m pip install -r requirements-dev.txt
 python -m playwright install chromium
 python scripts/build_pdf_fixtures.py
 python scripts/build_previews.py
 ```
-
-PDF 输入测试在缺少可选依赖时跳过；安装 `requirements-input.txt` 后会执行全部输入测试。原有 8 项测试保留，新增测试覆盖全风格内容一致性、额外章节、无照片、安全链接、PDF 图片内容与旧命令兼容。视觉和 OCR 核对结果见 [验证记录](docs/validation.md)。

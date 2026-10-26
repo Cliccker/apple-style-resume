@@ -61,7 +61,9 @@ def main():
         missing = [text for text in nodes if normalize(text) not in combined]
         results.append({'file': source.relative_to(ROOT).as_posix(), 'page_text_lengths': page_lengths,
                         'missing_html_text': missing, 'glyphs_outside_page': outside})
-    (ROOT / 'docs/pdf-checks.json').write_text(json.dumps(results, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    report_dir = ROOT / 'output/validation'
+    report_dir.mkdir(parents=True, exist_ok=True)
+    (report_dir / 'pdf-checks.json').write_text(json.dumps(results, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     failures = [r for r in results if r['missing_html_text'] or r['glyphs_outside_page'] or not all(r['page_text_lengths'])]
     if failures:
         raise SystemExit(json.dumps(failures, ensure_ascii=False, indent=2))

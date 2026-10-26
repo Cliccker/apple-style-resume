@@ -107,7 +107,9 @@ def main():
         # Split sheets to keep every thumbnail large enough to inspect.
         for part, offset in enumerate(range(0, len(entries), 12), 1):
             contact_sheet(entries[offset:offset + 12], ROOT / f'docs/images/gallery/{mode}-{part}.png')
-    (ROOT / 'docs/preview-checks.json').write_text(json.dumps(results, indent=2) + '\n', encoding='utf-8')
+    report_dir = ROOT / 'output/validation'
+    report_dir.mkdir(parents=True, exist_ok=True)
+    (report_dir / 'preview-checks.json').write_text(json.dumps(results, indent=2) + '\n', encoding='utf-8')
     cards = []
     for style, theme in STYLES.items():
         cards.append(f'<article><h2>{escape(theme["name"])}</h2>'

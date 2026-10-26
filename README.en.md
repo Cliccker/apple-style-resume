@@ -26,7 +26,7 @@ Create responsive HTML and A4 PDF resumes from Markdown or PDF using 12 company-
 | [Adobe / Spectrum](references/styles/adobe-spectrum/DESIGN.md) `adobe-spectrum` | [HTML](examples/preview/styles/adobe-spectrum/zh-CN/index.html) · [PDF](examples/preview/styles/adobe-spectrum/zh-CN/resume.pdf) | [HTML](examples/preview/styles/adobe-spectrum/en/index.html) · [PDF](examples/preview/styles/adobe-spectrum/en/resume.pdf) |
 | [Salesforce / Lightning](references/styles/salesforce-lightning/DESIGN.md) `salesforce-lightning` | [HTML](examples/preview/styles/salesforce-lightning/zh-CN/index.html) · [PDF](examples/preview/styles/salesforce-lightning/zh-CN/resume.pdf) | [HTML](examples/preview/styles/salesforce-lightning/en/index.html) · [PDF](examples/preview/styles/salesforce-lightning/en/resume.pdf) |
 
-Full desktop/mobile screenshots and every rendered PDF page live beside each preview. [Geometry results](docs/preview-checks.json) cover 24 style/language pairs and six career previews. [DESIGN.md](DESIGN.md) links to each adaptation's official sources, retrieval date, tokens, hierarchy and print rules. It also records existing community DESIGN.md discovery without copying third-party specifications.
+Full desktop/mobile screenshots and every rendered PDF page live beside each preview. [DESIGN.md](DESIGN.md) links to each adaptation's official sources, retrieval date, tokens, hierarchy and print rules. It also records existing community DESIGN.md discovery without copying third-party specifications.
 
 ## Install and migrate
 
@@ -95,14 +95,11 @@ Fonts load locally by default. Missing brand fonts use each documented fallback 
 
 [12 new Markdown profiles](examples/profiles) cover six fictional candidates in two languages. [Career previews](examples/preview/careers) cover graduate, frontend, backend, product, design and data roles, including long content, long links, no employment and additional sections. [Six primary source studies](references/sample-sources.md) informed structure only; actual candidate data was not copied. Real input/output is not automatically anonymized.
 
-## Development and validation
+## Rebuild examples
 
 ```bash
-python -m unittest discover -s tests -v
 python -m pip install -r requirements-dev.txt
 python -m playwright install chromium
 python scripts/build_pdf_fixtures.py
 python scripts/build_previews.py
 ```
-
-PDF input tests skip without optional dependencies. Install requirements-input.txt to run them. The eight original tests remain; additions cover cross-style content, extra sections, no-photo behavior, safe links, mixed PDF content and CLI compatibility. See the [validation record](docs/validation.md) for visual and recognition checks.
