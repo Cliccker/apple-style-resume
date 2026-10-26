@@ -1,0 +1,251 @@
+[
+  {
+    "file": "examples/preview/styles/adobe-spectrum/en/resume.pdf",
+    "page_text_lengths": [
+      1642
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/adobe-spectrum/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/ant-design/en/resume.pdf",
+    "page_text_lengths": [
+      1642
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/ant-design/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/apple/en/resume.pdf",
+    "page_text_lengths": [
+      913,
+      729
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/apple/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      313,
+      261
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/baidu-dls/en/resume.pdf",
+    "page_text_lengths": [
+      1642
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/baidu-dls/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/bytedance-arco/en/resume.pdf",
+    "page_text_lengths": [
+      1532,
+      110
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/bytedance-arco/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/douyin-semi/en/resume.pdf",
+    "page_text_lengths": [
+      1642
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/douyin-semi/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/google-material/en/resume.pdf",
+    "page_text_lengths": [
+      1532,
+      110
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/google-material/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/huawei-harmonyos/en/resume.pdf",
+    "page_text_lengths": [
+      1532,
+      110
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/huawei-harmonyos/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/ibm-carbon/en/resume.pdf",
+    "page_text_lengths": [
+      1532,
+      110
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/ibm-carbon/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/microsoft-fluent/en/resume.pdf",
+    "page_text_lengths": [
+      1642
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/microsoft-fluent/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/salesforce-lightning/en/resume.pdf",
+    "page_text_lengths": [
+      1532,
+      110
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/salesforce-lightning/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/tencent-tdesign/en/resume.pdf",
+    "page_text_lengths": [
+      1642
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/styles/tencent-tdesign/zh-CN/resume.pdf",
+    "page_text_lengths": [
+      574
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/careers/backend/resume.pdf",
+    "page_text_lengths": [
+      1415,
+      1857,
+      596
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/careers/data/resume.pdf",
+    "page_text_lengths": [
+      982
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/careers/designer/resume.pdf",
+    "page_text_lengths": [
+      930
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/careers/frontend/resume.pdf",
+    "page_text_lengths": [
+      1042
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/careers/graduate/resume.pdf",
+    "page_text_lengths": [
+      616
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  },
+  {
+    "file": "examples/preview/careers/product/resume.pdf",
+    "page_text_lengths": [
+      848
+    ],
+    "missing_html_text": [],
+    "glyphs_outside_page": 0
+  }
+]

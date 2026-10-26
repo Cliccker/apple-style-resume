@@ -3,10 +3,28 @@
 
 import re
 import argparse
-from html import escape
+import json
+from html import escape, unescape
 from urllib.parse import urlsplit
 import shutil
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+STYLES = json.loads((ROOT / 'assets/styles.json').read_text(encoding='utf-8'))
+
+
+def section_key(title: str) -> str:
+    title = title.lower().strip()
+    for key, names in (
+        ('profile', ('个人简介', '简介', 'profile', 'summary', 'professional summary')),
+        ('gaming', ('游戏经历', 'gaming', 'gaming experience')),
+        ('early', ('早期项目', '早期项目与专利', '专利', 'early projects', 'patents', 'early projects & patents')),
+        ('experience', ('工作经历', '工作经验', 'experience', 'employment', 'work experience', 'professional experience')),
+        ('education', ('教育背景', '教育', 'education', '学历')),
+    ):
+        if title in names:
+            return key
+    return 'generic'
 
 
 def clean_markdown(text: str) -> str:
@@ -35,6 +53,8 @@ def parse_markdown_resume(md_text: str) -> dict:
         "early_works": [],
         "education": [],
         "gaming": [],
+        "sections": [],
+        "extra_contacts": [],
     }
 
     lines = md_text.split("\n")
@@ -62,8 +82,9 @@ def parse_markdown_resume(md_text: str) -> dict:
             data["role"] = clean
         i += 1
 
-    # Parse contact info from all lines
-    for line in lines:
+    # Contacts belong to the header; project links must not become contacts.
+    header_end = next((n for n, line in enumerate(lines) if line.startswith('## ')), len(lines))
+    for line in lines[:header_end]:
         stripped = line.strip()
         email_match = re.search(r"[\w.-]+@[\w.-]+\.\w+", stripped)
         if email_match and not data["email"]:
@@ -82,35 +103,22 @@ def parse_markdown_resume(md_text: str) -> dict:
             elif not data["blog"]:
                 data["blog"] = text
                 data["blog_url"] = url
+            else:
+                data['extra_contacts'].append((text, url))
 
     # Find sections
-    sections = {}
     current_section = None
-    current_content = []
-
     for line in lines[i:]:
         if line.startswith("## "):
-            if current_section:
-                sections[current_section] = current_content
-            title = line[3:].strip().lower()
-            if any(k in title for k in ["简介", "profile", "summary"]):
-                current_section = "profile"
-            elif any(k in title for k in ["游戏", "gaming"]):
-                current_section = "gaming"
-            elif any(k in title for k in ["经历", "experience", "工作", "work"]):
-                current_section = "experience"
-            elif any(k in title for k in ["早期", "项目", "patent", "projects", "专利"]):
-                current_section = "early"
-            elif any(k in title for k in ["教育", "education", "学历"]):
-                current_section = "education"
-            else:
-                current_section = title
-            current_content = []
+            title = line[3:].strip()
+            current_section = {'key': section_key(title), 'title': title, 'lines': []}
+            data['sections'].append(current_section)
         elif current_section is not None:
-            current_content.append(line)
+            current_section['lines'].append(line)
 
-    if current_section:
-        sections[current_section] = current_content
+    sections = {}
+    for section in data['sections']:
+        sections.setdefault(section['key'], []).extend(section['lines'])
 
     # Parse profile - filter out --- separators
     if "profile" in sections:
@@ -177,7 +185,8 @@ def parse_experience(lines: list) -> list:
             current_project = None
 
         # Date line (italic, right after company heading)
-        elif stripped.startswith("*") and stripped.endswith("*") and current_exp and not current_exp["date"]:
+        elif (stripped.startswith("*") and not stripped.startswith("**")
+              and stripped.endswith("*") and current_exp and not current_exp["date"]):
             date_match = re.search(r"\*(.+?)\*", stripped)
             if date_match:
                 current_exp["date"] = date_match.group(1)
@@ -216,10 +225,12 @@ def parse_experience(lines: list) -> list:
                     current_exp["description"] = bullet
 
         # Regular description text (not a heading, not a bullet)
-        elif current_exp and not current_project and not stripped.startswith("#"):
+        elif current_exp and not stripped.startswith("#"):
             clean = clean_markdown(stripped)
             if clean and not clean.startswith("---"):
-                if current_exp["description"]:
+                if current_project:
+                    current_project.setdefault('paragraphs', []).append(clean)
+                elif current_exp["description"]:
                     current_exp["description"] += " " + clean
                 else:
                     current_exp["description"] = clean
@@ -338,17 +349,73 @@ LABELS = {
 }
 
 
-def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool) -> str:
+def inline_markdown(text: str) -> str:
+    """Render a small, escaped inline subset; never accept source HTML."""
+    parts = []
+    position = 0
+    for match in re.finditer(r'\[([^\]]+)\]\(([^)]+)\)', text):
+        parts.append(escape(text[position:match.start()], quote=True))
+        label, url = match.groups()
+        label = escape(label, quote=True)
+        if urlsplit(url).scheme.lower() in ('http', 'https'):
+            parts.append(f'<a href="{escape(url, quote=True)}" rel="noopener noreferrer">{label}</a>')
+        else:
+            parts.append(label)
+        position = match.end()
+    parts.append(escape(text[position:], quote=True))
+    result = ''.join(parts)
+    result = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', result)
+    result = re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'<em>\1</em>', result)
+    return result
+
+
+def render_blocks(lines: list) -> str:
+    """Preserve paragraphs, headings and list items in arbitrary resume sections."""
+    blocks, paragraph = [], []
+    in_list = False
+
+    def flush():
+        if paragraph:
+            blocks.append('<p>' + inline_markdown(' '.join(paragraph)) + '</p>')
+            paragraph.clear()
+
+    for line in [*lines, '']:
+        text = line.strip()
+        bullet = re.match(r'^(?:[-*+]\s+|\d+[.)]\s+)(.*)', text)
+        if not bullet and in_list:
+            blocks.append('</ul>')
+            in_list = False
+        if not text or re.fullmatch(r'[-*_]{3,}', text):
+            flush()
+        elif bullet:
+            flush()
+            if not in_list:
+                blocks.append('<ul>')
+                in_list = True
+            blocks.append('<li>' + inline_markdown(bullet.group(1)) + '</li>')
+        elif text.startswith('#') or (text.startswith('**') and text.endswith('**')):
+            flush()
+            blocks.append('<h3>' + inline_markdown(re.sub(r'^#{1,6}\s*', '', text)) + '</h3>')
+        else:
+            paragraph.append(text)
+    return ''.join(blocks)
+
+
+def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool, style: str) -> str:
     """Fill the two existing layouts, escaping all user-supplied text."""
     filename = "resume_pdf_template.html" if pdf else "resume_template.html"
-    template = (Path(__file__).resolve().parent.parent / "assets" / filename).read_text(encoding="utf-8")
+    template = (ROOT / "assets" / filename).read_text(encoding="utf-8")
+    if style not in STYLES:
+        raise ValueError(f'Unknown style: {style}')
+    theme = STYLES[style]
     h = lambda value: escape(str(value), quote=True)
     values = {key: h(value) for key, value in LABELS[lang].items()}
     values.update({"LANG": lang, "NAME": h(data["name"]), "ROLE": h(data["role"]),
-                   "PHOTO": h(photo), "PROFILE": h(data["profile"])})
-    values["FONT_LINK"] = ('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-                           'family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap">'
-                           if web_fonts else "")
+                   "PHOTO": h(photo or ''), "PROFILE": h(data["profile"]), 'STYLE': style})
+    values['STYLE_CSS'] = ((ROOT / 'assets/styles/common.css').read_text(encoding='utf-8') + '\n' +
+                           (ROOT / 'assets/styles' / f'{style}.css').read_text(encoding='utf-8'))
+    values['FONT_LINK'] = (f'<link rel="stylesheet" href="{h(theme["web_fonts"])}">' if web_fonts else '')
+    values['AVATAR'] = f'<img src="{h(photo)}" alt="{h(data["name"])}" class="avatar">' if photo else ''
     values["INTENT_ROLE_BADGE"] = (
         f'<span class="role-badge">{h(data["intent_role"])}</span>' if data["intent_role"] else ""
     )
@@ -361,12 +428,15 @@ def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool) -> st
         label, url = data[key], data[key + "_url"]
         if label and url and urlsplit(url).scheme.lower() in ("https", "http"):
             contacts.append(f'<a href="{h(url)}" target="_blank" rel="noopener noreferrer">{h(label)}</a>')
+    for label, url in data.get('extra_contacts', []):
+        if urlsplit(url).scheme.lower() in ('https', 'http'):
+            contacts.append(f'<a href="{h(url)}" rel="noopener noreferrer">{h(label)}</a>')
     values["CONTACT_INFO"] = '<span class="divider-dot">&#183;</span>'.join(contacts)
     values["CONTACT_LINE"] = '<span class="divider">|</span>'.join(contacts)
 
     experiences = []
     for index, exp in enumerate(data["experiences"]):
-        outer = "exp-block" + (" page-break" if index else "") if pdf else "exp-item"
+        outer = "exp-block" + (" page-break" if index and style == 'apple' else "") if pdf else "exp-item"
         role_class = "exp-role-tag" if pdf else "exp-role-inline"
         role_text = (" · " if pdf and exp["role"] else "") + exp["role"]
         body = (f'<div class="{outer}"><div class="exp-header"><div class="exp-company-role">'
@@ -383,7 +453,8 @@ def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool) -> st
                 bullets = "".join(f'<li>{h(item)}</li>' for item in project["bullets"])
                 body += (f'<div class="{cls}"><div class="project-title">{h(project["title"])}'
                          f' <span class="project-meta">{h(project["meta"])}</span></div>'
-                         f'<div class="project-body"><ul>{bullets}</ul></div></div>')
+                         f'<div class="project-body"><ul>{bullets}</ul>' +
+                         ''.join(f'<p>{h(p)}</p>' for p in project.get('paragraphs', [])) + '</div></div>')
             body += '</div>'
         experiences.append(body + '</div>')
     values["EXPERIENCE_SECTIONS"] = "\n".join(experiences)
@@ -411,6 +482,50 @@ def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool) -> st
                           f'<div class="gaming-games">{games}</div></div>')
     values["GAMING_ITEMS"] = "".join(gaming)
 
+    # Raw sections preserve order, repeated headings, and unfamiliar structures.
+    # Use the established rich layouts only for their supported canonical shape.
+    if 'sections' in data:
+        rendered_sections = []
+        counts = {key: sum(s['key'] == key for s in data['sections'])
+                  for key in ('profile', 'experience', 'early', 'education', 'gaming')}
+        titles = {'profile': 'PROFILE_TITLE', 'experience': 'EXPERIENCE_TITLE',
+                  'early': 'EARLY_SECTION_TITLE', 'education': 'EDUCATION_TITLE', 'gaming': 'GAMING_TITLE'}
+        for section in data['sections']:
+            key = section['key']
+            lines = [line for line in section['lines'] if line.strip() and line.strip() != '---']
+            if not lines:
+                continue
+            generic_content = '<div class="generic-block">' + render_blocks(section['lines']) + '</div>'
+            content = generic_content
+            single = counts.get(key) == 1
+            if key == 'profile' and single and not any(re.match(r'^\s*(?:#|[-*+]\s)', line) for line in lines):
+                content = f'<p class="profile-text">{inline_markdown(data["profile"])}</p>'
+            elif (key == 'experience' and single and lines[0].startswith('### ')
+                  and not any('](' in line or (line.startswith('#') and not line.startswith('### ')) for line in lines)):
+                content = '<div class="experience-list">' + values['EXPERIENCE_SECTIONS'] + '</div>'
+            elif key == 'early' and single and all(re.match(r'^[-*]\s+\*\*.+?\*\*', line) for line in lines):
+                content = '<div class="early-list early-grid">' + values['EARLY_WORK_ITEMS'] + '</div>'
+            elif key == 'education' and single and all(re.match(r'^[-*]\s+.+\|', line) for line in lines):
+                content = '<div class="edu-list edu-grid">' + values['EDUCATION_ITEMS'] + '</div>'
+            elif key == 'gaming' and single and lines[0].startswith('**') and all(
+                    re.match(r'^(?:\*\*.+\*\*|[-*]\s+.+)$', line) for line in lines):
+                content = '<div class="gaming-list gaming-grid">' + values['GAMING_ITEMS'] + '</div>'
+            if key != 'profile' and content != generic_content:
+                # A noncanonical entry must not lose facts just to fit a rich layout.
+                normalize = lambda text: re.sub(r'[\W_]+', '', text).casefold()
+                source_text = normalize(' '.join(lines))
+                rendered_text = normalize(unescape(re.sub(r'<[^>]*>', '', content)))
+                if source_text != rendered_text or any('](' in line for line in lines):
+                    content = generic_content
+            title = values[titles[key]] if key in titles else h(section['title'])
+            heading = 'section-title' if pdf else 'card-section-title'
+            rendered_sections.append(f'<section class="resume-section card" data-section="{key}">'
+                                     f'<h2 class="{heading}">{title}</h2>{content}</section>')
+        # Replace the fixed section region, leaving header and footer untouched.
+        values['SECTIONS'] = '\n'.join(rendered_sections)
+        template = re.sub(r'<!-- START:PROFILE -->.*<!-- END:GAMING -->',
+                          '{{SECTIONS}}', template, flags=re.S)
+
     for section, content in (("PROFILE", data["profile"]), ("EXPERIENCE", data["experiences"]),
                              ("EARLY", data["early_works"]), ("EDUCATION", data["education"]),
                              ("GAMING", data.get("gaming"))):
@@ -420,36 +535,58 @@ def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool) -> st
     return re.sub(r'\{\{([A-Z_]+)\}\}', lambda match: values[match.group(1)], template)
 
 
-def render_web_template(data: dict, lang: str = "zh-CN", photo: str = "photo.jpg", web_fonts: bool = False) -> str:
-    return _render(data, lang, photo, pdf=False, web_fonts=web_fonts)
+def render_web_template(data: dict, lang: str = "zh-CN", photo: str = "photo.jpg", web_fonts: bool = False,
+                        style: str = 'apple') -> str:
+    return _render(data, lang, photo, pdf=False, web_fonts=web_fonts, style=style)
 
 
-def render_pdf_template(data: dict, lang: str = "zh-CN", photo: str = "photo.jpg", web_fonts: bool = False) -> str:
-    return _render(data, lang, photo, pdf=True, web_fonts=web_fonts)
+def render_pdf_template(data: dict, lang: str = "zh-CN", photo: str = "photo.jpg", web_fonts: bool = False,
+                        style: str = 'apple') -> str:
+    return _render(data, lang, photo, pdf=True, web_fonts=web_fonts, style=style)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="Structured Markdown resume")
-    parser.add_argument("photo", type=Path, help="JPG or PNG portrait")
-    parser.add_argument("output", type=Path, help="Destination directory")
+    parser.add_argument("input", nargs='?', type=Path, help="Structured Markdown resume")
+    parser.add_argument("paths", nargs='*', type=Path, help="OUTPUT or legacy PHOTO OUTPUT")
+    parser.add_argument('--photo', type=Path, help='Optional JPG or PNG portrait')
+    parser.add_argument('--style', choices=STYLES, default='apple')
+    parser.add_argument('--list-styles', action='store_true')
     parser.add_argument("--lang", choices=LABELS, default="zh-CN", help="Interface language; body text is not translated")
-    parser.add_argument("--web-fonts", action="store_true", help="Load Inter and Noto Sans SC from Google Fonts (requires network)")
+    parser.add_argument("--web-fonts", action="store_true", help="Load the selected style's open web fonts (requires network)")
     args = parser.parse_args()
-    if not args.input.is_file() or not args.photo.is_file():
+    if args.list_styles:
+        for name, theme in STYLES.items():
+            print(f'{name:24} {theme["name"]}')
+        return
+    if args.input is None or len(args.paths) not in (1, 2):
+        parser.error('Use INPUT OUTPUT [--photo PHOTO] or INPUT PHOTO OUTPUT.')
+    if len(args.paths) == 2:
+        if args.photo:
+            parser.error('Do not combine a positional photo with --photo.')
+        args.photo = args.paths[0]
+    args.output = args.paths[-1]
+    if not args.input.is_file() or (args.photo and not args.photo.is_file()):
         parser.error("Input Markdown and photo must be existing files.")
-    if args.photo.suffix.lower() not in (".jpg", ".jpeg", ".png"):
+    if args.input.suffix.lower() != '.md':
+        parser.error('Prepare PDF input with scripts/prepare_pdf.py, then review/normalize its text as Markdown.')
+    if args.photo and args.photo.suffix.lower() not in (".jpg", ".jpeg", ".png"):
         parser.error("Photo must be JPG, JPEG or PNG.")
     data = parse_markdown_resume(args.input.read_text(encoding="utf-8-sig"))
     if not data["name"]:
         parser.error("Resume must contain a '# Name' heading.")
     args.output.mkdir(parents=True, exist_ok=True)
-    photo_name = "photo" + args.photo.suffix.lower()
-    photo_dest = args.output / photo_name
-    if args.photo.resolve() != photo_dest.resolve():
-        shutil.copyfile(args.photo, photo_dest)
+    photo_name = None
+    if args.photo:
+        photo_name = "photo" + args.photo.suffix.lower()
+        photo_dest = args.output / photo_name
+        if args.photo.resolve() != photo_dest.resolve():
+            shutil.copyfile(args.photo, photo_dest)
+    source_dest = args.output / 'source.md'
+    if args.input.resolve() != source_dest.resolve():
+        shutil.copyfile(args.input, source_dest)
     for filename, render in (("index.html", render_web_template), ("resume_a4.html", render_pdf_template)):
-        (args.output / filename).write_text(render(data, args.lang, photo_name, args.web_fonts), encoding="utf-8")
+        (args.output / filename).write_text(render(data, args.lang, photo_name, args.web_fonts, style=args.style), encoding="utf-8")
         print(f"Created {filename}")
     print("For PDF export, run scripts/export_pdf.py on resume_a4.html.")
 

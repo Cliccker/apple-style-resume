@@ -94,11 +94,12 @@
         .exp-header, .project-title { break-after: avoid; }
         .project-body li, .edu-item, .early-item, .gaming-item { break-inside: avoid; }
     </style>
+    <style>{{STYLE_CSS}}</style>
 </head>
-<body>
+<body class="resume-pdf" data-style="{{STYLE}}">
     <!-- Header -->
     <div class="header">
-        <img src="{{PHOTO}}" alt="{{NAME}}" class="avatar">
+        {{AVATAR}}
         <div class="header-info">
             <div class="name">{{NAME}}</div>
             <div class="role-line">{{ROLE_LINE}}</div>

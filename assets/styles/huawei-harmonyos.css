@@ -1,0 +1,18 @@
+/* Resume adaptation. See references/styles/huawei-harmonyos/DESIGN.md */
+:root {
+    --bg-primary: #F1F3F5; --bg-card: #FFFFFF; --bg-secondary: #F1F3F5;
+    --text-primary: #182431; --text-secondary: #42505E; --text-tertiary: #596775;
+    --accent: #0A59F7; --accent-light: #EBF1FF; --border: rgba(0,0,0,.10);
+    --radius-lg: 24px; --radius-md: 16px; --radius-sm: 16px;
+    --card-padding: 32px; --card-gap: 20px;
+    --font-family: "HarmonyOS Sans", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 0; --section-case: none;
+    --print-text: #42505E;
+}
+.resume-web .header { flex-direction: column; text-align: center; gap: 20px; }
+.resume-web .contact-row { justify-content: center; }
+.resume-web .title-row { justify-content: center; }
+.resume-web .card { border: 0; box-shadow: none; }
+.card-section-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.resume-web .avatar { border-radius: 32px; }
+.resume-pdf .header { padding-bottom: 16px; border-bottom: 2px solid var(--accent-light); }
+.resume-pdf .section-title { border-bottom: 0; color: var(--text-primary); }

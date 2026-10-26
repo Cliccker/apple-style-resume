@@ -1,0 +1,62 @@
+{
+  "apple": {
+    "name": "Apple",
+    "design": "references/styles/apple/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "google-material": {
+    "name": "Google / Material 3",
+    "design": "references/styles/google-material/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "microsoft-fluent": {
+    "name": "Microsoft / Fluent 2",
+    "design": "references/styles/microsoft-fluent/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "ibm-carbon": {
+    "name": "IBM / Carbon",
+    "design": "references/styles/ibm-carbon/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "ant-design": {
+    "name": "Ant Group / Ant Design",
+    "design": "references/styles/ant-design/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "tencent-tdesign": {
+    "name": "Tencent / TDesign",
+    "design": "references/styles/tencent-tdesign/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "bytedance-arco": {
+    "name": "ByteDance / Arco",
+    "design": "references/styles/bytedance-arco/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "douyin-semi": {
+    "name": "Douyin / Semi",
+    "design": "references/styles/douyin-semi/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "huawei-harmonyos": {
+    "name": "Huawei / HarmonyOS",
+    "design": "references/styles/huawei-harmonyos/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "baidu-dls": {
+    "name": "Baidu / Light DLS",
+    "design": "references/styles/baidu-dls/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "adobe-spectrum": {
+    "name": "Adobe / Spectrum",
+    "design": "references/styles/adobe-spectrum/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  },
+  "salesforce-lightning": {
+    "name": "Salesforce / Lightning",
+    "design": "references/styles/salesforce-lightning/DESIGN.md",
+    "web_fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+  }
+}

@@ -1,0 +1,17 @@
+/* Resume adaptation. See references/styles/salesforce-lightning/DESIGN.md */
+:root {
+    --bg-primary: #F3F3F3; --bg-card: #FFFFFF; --bg-secondary: #F3F7FC;
+    --text-primary: #181818; --text-secondary: #444444; --text-tertiary: #626262;
+    --accent: #0176D3; --accent-light: #EEF4FF; --border: rgba(0,0,0,.10);
+    --radius-lg: 8px; --radius-md: 4px; --radius-sm: 4px;
+    --card-padding: 24px; --card-gap: 16px;
+    --font-family: system-ui, "Noto Sans SC", "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 0; --section-case: none;
+    --print-text: #444444;
+}
+.resume-web .header { padding: 28px; border-radius: 8px; background: var(--accent-light); border: 1px solid var(--border); }
+.resume-web .card { padding: 0; box-shadow: none; overflow: hidden; }
+.card-section-title { background: var(--bg-secondary); color: var(--text-primary); padding: 14px 24px; border-bottom: 1px solid var(--border); margin: 0; font-size: 15px; }
+.resume-web .card > :not(h2) { margin: 20px 24px 24px; }
+.resume-web .project-item { border: 1px solid var(--border); background: white; }
+.resume-pdf .section-title { padding: 6px 10px; background: var(--accent-light); border: 1px solid var(--border); }
+@media (max-width: 600px) { .resume-web .card { padding: 0; } .resume-web .header { padding: 20px; } }

@@ -163,12 +163,13 @@
             *, *::before, *::after { transition: none !important; }
         }
     </style>
+    <style>{{STYLE_CSS}}</style>
 </head>
-<body>
+<body class="resume-web" data-style="{{STYLE}}">
     <div class="page">
         <!-- Header -->
         <header class="header">
-            <img src="{{PHOTO}}" alt="{{NAME}}" class="avatar">
+            {{AVATAR}}
             <div class="header-info">
                 <h1 class="name">{{NAME}}</h1>
                 <div class="title-row">

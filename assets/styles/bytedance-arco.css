@@ -1,0 +1,16 @@
+/* Resume adaptation. See references/styles/bytedance-arco/DESIGN.md */
+:root {
+    --bg-primary: #F7F8FA; --bg-card: #FFFFFF; --bg-secondary: #F7F8FA;
+    --text-primary: #1D2129; --text-secondary: #4E5969; --text-tertiary: #6B7785;
+    --accent: #165DFF; --accent-light: #E8F3FF; --border: rgba(0,0,0,.10);
+    --radius-lg: 4px; --radius-md: 2px; --radius-sm: 2px;
+    --card-padding: 24px; --card-gap: 16px;
+    --font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 0.8px; --section-case: uppercase;
+    --print-text: #4E5969;
+}
+.resume-web .header { padding-left: 24px; border-left: 8px solid var(--accent); }
+.resume-web .card { box-shadow: none; border: 0; border-top: 2px solid var(--text-primary); }
+.card-section-title { color: var(--text-primary); font-size: 14px; font-weight: 700; }
+.resume-web .project-item { border-left: 3px solid var(--accent-light); }
+.resume-pdf .section-title { border-top: 2px solid var(--text-primary); padding-top: 8px; border-bottom: 0; }
+.resume-pdf .project { border-left: 2px solid var(--accent); }

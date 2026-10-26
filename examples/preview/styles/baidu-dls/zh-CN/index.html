@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>示例候选人 - 产品工程师</title>
+
+    <style>
+        :root {
+            --bg-primary: #FAFAFA;
+            --bg-card: #FFFFFF;
+            --bg-secondary: #F5F5F7;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --text-tertiary: #A1A1A6;
+            --accent: #0071E3;
+            --accent-light: #E8F4FD;
+            --border: rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.03);
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page { max-width: 960px; margin: 0 auto; padding: 48px 32px; }
+
+        /* Header */
+        .header { display: flex; align-items: center; gap: 28px; margin-bottom: 40px; }
+        .avatar {
+            width: 120px; height: 120px; border-radius: 28px; object-fit: cover;
+            box-shadow: var(--shadow-md); flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .avatar:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); }
+        .header-info { flex: 1; min-width: 0; }
+        .name { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px; }
+        .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+        .role { font-size: 16px; font-weight: 500; color: var(--text-secondary); }
+        .role-badge {
+            display: inline-flex; align-items: center; padding: 4px 14px;
+            background: var(--accent-light); color: var(--accent);
+            font-size: 13px; font-weight: 600; border-radius: var(--radius-full); letter-spacing: 0.3px;
+        }
+        .contact-row {
+            display: flex; align-items: center; flex-wrap: wrap;
+            gap: 6px 18px; font-size: 13.5px; color: var(--text-secondary);
+        }
+        .contact-row a { color: var(--accent); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
+        .contact-row a:hover { opacity: 0.7; text-decoration: underline; }
+        .divider-dot { color: var(--text-tertiary); font-size: 10px; }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card); border-radius: var(--radius-lg); padding: 32px;
+            margin-bottom: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover { box-shadow: var(--shadow-md); }
+        .card-section-title {
+            font-size: 13px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--text-tertiary); margin-bottom: 20px;
+        }
+
+        /* Profile */
+        .profile-text { font-size: 14px; line-height: 1.8; color: var(--text-secondary); }
+
+        /* Experience */
+        .experience-list { display: flex; flex-direction: column; gap: 28px; }
+        .exp-item { position: relative; }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 12px; }
+        .exp-company { font-size: 16px; font-weight: 600; letter-spacing: -0.2px; }
+        .exp-role-inline { font-size: 14px; font-weight: 400; color: var(--text-secondary); margin-left: 6px; }
+        .exp-date { font-size: 13px; color: var(--text-tertiary); white-space: nowrap; flex-shrink: 0; }
+        .exp-desc { font-size: 13.5px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 12px; }
+        .project-list { display: flex; flex-direction: column; gap: 14px; }
+        .project-item { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 16px 20px; }
+        .project-title { font-size: 13.5px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .project-meta { font-size: 12px; color: var(--text-tertiary); font-weight: 400; }
+        .project-body { font-size: 13px; line-height: 1.7; color: var(--text-secondary); margin-top: 6px; }
+        .project-body ul { list-style: none; padding: 0; margin: 0; }
+        .project-body ul li { position: relative; padding-left: 14px; margin-bottom: 3px; }
+        .project-body ul li::before {
+            content: ''; position: absolute; left: 0; top: 10px;
+            width: 5px; height: 5px; border-radius: 50%; background: var(--text-tertiary);
+        }
+
+        /* Early Work */
+        .early-list { display: flex; flex-direction: column; gap: 12px; }
+        .early-item { display: flex; gap: 14px; align-items: flex-start; }
+        .early-marker { width: 28px; height: 28px; border-radius: 8px; background: var(--bg-secondary); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+        .early-marker svg { width: 14px; height: 14px; color: var(--text-secondary); }
+        .early-content { flex: 1; }
+        .early-title { font-size: 14px; font-weight: 600; }
+        .early-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 2px; }
+
+        /* Education */
+        .edu-list { display: flex; flex-direction: column; gap: 14px; }
+        .edu-item { display: flex; align-items: flex-start; gap: 14px; }
+        .edu-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--bg-secondary); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .edu-icon svg { width: 18px; height: 18px; color: var(--text-secondary); }
+        .edu-content { flex: 1; }
+        .edu-school { font-size: 14.5px; font-weight: 600; }
+        .edu-major { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+        /* Gaming */
+        .gaming-list { display: flex; flex-direction: column; gap: 16px; }
+        .gaming-platform { display: flex; flex-direction: column; gap: 6px; }
+        .gaming-platform-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .gaming-games { display: flex; flex-wrap: wrap; gap: 6px 12px; }
+        .gaming-game { font-size: 13px; color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; }
+        .gaming-hours { font-size: 11px; color: var(--text-tertiary); background: var(--bg-secondary); padding: 2px 8px; border-radius: var(--radius-full); }
+
+        /* Footer */
+        .footer { text-align: center; padding: 32px 0 16px; font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.5px; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card { animation: fadeInUp 0.5s ease forwards; opacity: 0; }
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.15s; }
+        .card:nth-child(4) { animation-delay: 0.2s; }
+
+        @media print {
+            body { background: white !important; }
+            .page { padding: 0; max-width: 100%; }
+            .card { box-shadow: none !important; border: 1px solid #eee !important; }
+            .avatar { box-shadow: none !important; }
+        }
+
+        .name, .contact-row, .project-body, .exp-desc { overflow-wrap: anywhere; }
+        @media (max-width: 600px) {
+            .page { padding: 28px 16px; }
+            .header { gap: 16px; align-items: flex-start; margin-bottom: 24px; }
+            .avatar { width: 80px; height: 80px; border-radius: 20px; }
+            .name { font-size: 28px; }
+            .role { font-size: 14px; }
+            .card { padding: 22px; }
+            .exp-header { flex-wrap: wrap; }
+            .exp-role-inline { display: block; margin-left: 0; margin-top: 3px; }
+            .contact-row { gap: 6px 10px; }
+            .divider-dot { display: none; }
+            .project-item { padding: 14px; }
+        }
+        @media (prefers-reduced-motion: reduce), print {
+            .card { animation: none; opacity: 1; transform: none; }
+            *, *::before, *::after { transition: none !important; }
+        }
+    </style>
+    <style>/* Shared reading and print rules; brand styles follow this sheet. */
+:root {
+    --font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    --card-padding: 32px;
+    --card-gap: 20px;
+    --section-size: 13px;
+    --section-tracking: 1.5px;
+    --section-case: uppercase;
+    --section-color: var(--text-tertiary);
+    --print-text: #525252;
+}
+body { font-family: var(--font-family); }
+body, .header-info, .exp-company-role, .generic-block { overflow-wrap: anywhere; min-width: 0; }
+.resume-web .card { padding: var(--card-padding); margin-bottom: var(--card-gap); }
+.card-section-title, .section-title {
+    font-size: var(--section-size); letter-spacing: var(--section-tracking);
+    text-transform: var(--section-case); color: var(--section-color);
+}
+.generic-block { font-size: 14px; line-height: 1.75; color: var(--text-secondary); }
+.generic-block h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin: 16px 0 6px; break-after: avoid; }
+.generic-block h3:first-child { margin-top: 0; }
+.generic-block p + p, .generic-block ul + p { margin-top: 8px; }
+.generic-block ul { padding-left: 20px; margin: 6px 0; }
+.generic-block li { margin-bottom: 4px; }
+.generic-block a { color: var(--accent); }
+.experience-list, .project-list { min-width: 0; }
+.resume-pdf .resume-section { margin-top: 24px; }
+.resume-pdf .section-title { font-size: 11px; margin-top: 0; }
+.resume-pdf .generic-block { font-size: 12px; color: var(--print-text); }
+.resume-pdf .generic-block h3 { font-size: 12.5px; }
+.resume-pdf .generic-block li { break-inside: avoid; }
+.resume-pdf .project { background: var(--bg-secondary); border-radius: var(--radius-sm); }
+.resume-pdf .name, .resume-pdf .exp-company, .resume-pdf .role-line strong { color: var(--text-primary); }
+.resume-pdf .contact-line a { color: var(--accent); }
+.resume-pdf:not([data-style="apple"]) .exp-date,
+.resume-pdf:not([data-style="apple"]) .project-meta { color: var(--text-tertiary); }
+.resume-pdf:not([data-style="apple"]) .role-line,
+.resume-pdf:not([data-style="apple"]) .contact-line,
+.resume-pdf:not([data-style="apple"]) .exp-role-tag,
+.resume-pdf:not([data-style="apple"]) .edu-detail { color: var(--text-secondary); }
+.resume-pdf:not([data-style="apple"]) .early-detail,
+.resume-pdf:not([data-style="apple"]) .gaming-games { color: var(--print-text); }
+.resume-pdf .profile-text, .resume-pdf .exp-overview, .resume-pdf .project-body { color: var(--print-text); }
+.resume-pdf .exp-header { flex-wrap: wrap; }
+.resume-pdf .exp-date { white-space: normal; }
+.resume-pdf .project-body p { margin-top: 5px; }
+.resume-pdf .early-list, .resume-pdf .edu-list { flex-direction: column; gap: 10px; }
+.resume-pdf .early-item, .resume-pdf .edu-item { min-width: 0; }
+.resume-pdf .gaming-games { display: block; }
+.resume-pdf:not([data-style="apple"]) .resume-section { margin-top: 12px; }
+.resume-pdf:not([data-style="apple"]) .section-title { margin-bottom: 8px; }
+.resume-pdf:not([data-style="apple"]) .project { padding: 8px 12px; }
+.resume-pdf:not([data-style="apple"]) .exp-block { margin-bottom: 14px; }
+.resume-pdf:not([data-style="apple"]) .exp-block:last-child { margin-bottom: 0; }
+@media (max-width: 600px) {
+    .resume-web .card { padding: min(var(--card-padding), 22px); }
+    .resume-web .header { flex-wrap: wrap; }
+    .resume-web .header-info { min-width: min(100%, 220px); }
+    .resume-web .exp-date { white-space: normal; }
+}
+@media print {
+    .resume-section { box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .generic-block p, .project-body p { orphans: 2; widows: 2; }
+    .avatar { box-shadow: none; }
+}
+
+/* Resume adaptation. See references/styles/baidu-dls/DESIGN.md */
+:root {
+    --bg-primary: #F7F8FA; --bg-card: #FFFFFF; --bg-secondary: #F5F7FA;
+    --text-primary: #191C22; --text-secondary: #454C59; --text-tertiary: #626B7A;
+    --accent: #2B65D9; --accent-light: #EBF1FC; --border: rgba(0,0,0,.10);
+    --radius-lg: 4px; --radius-md: 4px; --radius-sm: 4px;
+    --card-padding: 24px; --card-gap: 16px;
+    --font-family: system-ui, "Noto Sans SC", "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 0; --section-case: none;
+    --print-text: #454C59;
+}
+.resume-web .header { padding-bottom: 24px; border-bottom: 3px solid var(--accent); }
+.resume-web .card { display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 20px; background: transparent; box-shadow: none; border: 0; border-bottom: 1px solid var(--border); padding-left: 0; padding-right: 0; }
+.card-section-title { font-size: 14px; color: var(--accent); }
+.resume-web .project-item { background: white; border: 1px solid var(--border); }
+.resume-pdf .section-title { color: var(--accent); border-bottom-color: var(--border); }
+@media (max-width: 600px) { .resume-web .card { display: block; } }
+</style>
+</head>
+<body class="resume-web" data-style="baidu-dls">
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <img src="photo.png" alt="示例候选人" class="avatar">
+            <div class="header-info">
+                <h1 class="name">示例候选人</h1>
+                <div class="title-row">
+                    <span class="role">产品工程师</span>
+                    <span class="role-badge">意向岗位：产品体验工程师</span>
+                </div>
+                <div class="contact-row">
+                    hello@example.com<span class="divider-dot">&#183;</span><a href="https://example.com/portfolio" target="_blank" rel="noopener noreferrer">作品集</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="resume-section card" data-section="profile"><h2 class="card-section-title">个人简介</h2><p class="profile-text">这是一份完全虚构的演示简历，所有组织、项目、时间和成果均为示例。关注清晰的信息表达、轻量的交互体验与可靠的工程交付，用原型和可验证的结果推进产品设计。</p></section>
+<section class="resume-section card" data-section="experience"><h2 class="card-section-title">工作经历</h2><div class="experience-list"><div class="exp-item"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">示例设计工作室 A</span><span class="exp-role-inline">产品工程师</span></div><span class="exp-date">2023.04 - 2025.08（虚构）</span></div><p class="exp-desc">参与虚构协作产品的需求分析、界面设计和前端实现。</p><div class="project-list"><div class="project-item"><div class="project-title">演示项目：轻量工作台 <span class="project-meta">(原型 / Web / 设计系统)</span></div><div class="project-body"><ul><li>将 6 类模拟任务整合为统一工作台，减少重复导航。</li><li>制作 12 个可复用界面组件，覆盖表单、状态提示和内容卡片。</li><li>在虚构测试中，将完成演示任务的步骤从 8 步缩短至 5 步。</li></ul></div></div><div class="project-item"><div class="project-title">演示项目：阅读空间 <span class="project-meta">(响应式 / 无障碍)</span></div><div class="project-body"><ul><li>设计桌面与移动端阅读布局，建立清晰的标题和正文层级。</li><li>为键盘导航、空状态和减少动态效果偏好提供对应体验。</li></ul></div></div></div></div>
+<div class="exp-item"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">示例产品团队 B</span><span class="exp-role-inline">前端开发工程师</span></div><span class="exp-date">2021.07 - 2023.03（虚构）</span></div><p class="exp-desc">根据虚构业务场景实现原型页面，完善基础交互与内容结构。 为示例组件补充使用文档，支持设计与开发协作。</p><div class="project-list"><div class="project-item"><div class="project-title">演示项目：组件预览台 <span class="project-meta">(HTML / CSS / JavaScript)</span></div><div class="project-body"><ul><li>组织 10 组虚构页面示例，统一间距、圆角和状态样式。</li><li>在示例流程中加入明确的操作反馈和可读的错误提示。</li></ul></div></div></div></div></div></section>
+<section class="resume-section card" data-section="early"><h2 class="card-section-title">早期项目与专利</h2><div class="early-list early-grid"><div class="early-item"><div class="early-content"><div class="early-title">示例信息看板（2020）</div><div class="early-detail">使用虚构数据练习信息分组与图表布局。</div></div></div><div class="early-item"><div class="early-content"><div class="early-title">示例排版实验（2021）</div><div class="early-detail">比较不同字号与行距下的阅读节奏。</div></div></div></div></section>
+<section class="resume-section card" data-section="education"><h2 class="card-section-title">教育背景</h2><div class="edu-list edu-grid"><div class="edu-item"><div class="edu-content"><div class="edu-school">示例学院（虚构）</div><div class="edu-major">计算机与交互设计 · 学士 · 2021</div></div></div></div></section>
+<section class="resume-section card" data-section="gaming"><h2 class="card-section-title">游戏经历</h2><div class="gaming-list gaming-grid"><div class="gaming-platform"><div class="gaming-platform-name">演示平台（虚构）</div><div class="gaming-games"><div class="gaming-game">示例探索游戏<span class="gaming-hours">40 小时（虚构）</span></div><div class="gaming-game">示例策略游戏<span class="gaming-hours">25 小时（虚构）</span></div></div></div></div></section>
+        <footer class="footer">用心设计</footer>
+    </div>
+</body>
+</html>

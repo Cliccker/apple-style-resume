@@ -1,0 +1,4 @@
+-r requirements-pdf.txt
+-r requirements-input.txt
+# Only needed to rebuild the original PDF input fixtures.
+reportlab>=4

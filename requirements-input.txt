@@ -1,0 +1,3 @@
+# Optional: PDF text extraction and page rendering (not OCR).
+pypdfium2>=4.30,<6
+Pillow>=10

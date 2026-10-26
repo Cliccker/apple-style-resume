@@ -1,157 +1,111 @@
-# Apple Style Resume
+# Brand Style Resume
 
-将 Markdown 简历和照片生成 Apple 风格的静态网页与 A4 PDF。保留克制的灰白配色、圆角卡片、清晰层级，以及 **Inter / Noto Sans SC** 字体组合。
+把 Markdown 或 PDF 简历转换为国内外公司设计语言启发的响应式网页与 A4 PDF。首批包含 12 套风格，支持中文、英文、额外章节和可选照片。它们是独立的设计改编，不是公司官方简历模板，也不承诺提高录用概率。
 
 **简体中文** · [English](README.en.md)
 
-## 效果预览
+## 风格画廊
 
-以下内容完全虚构：姓名、组织、学校、项目、时间和成果均为演示数据；头像是原创几何占位图，不含真实照片、电话或个人链接。网页和 PDF 均由本仓库脚本实际生成。
+[打开本地画廊](examples/preview/index.html)。GitHub 会显示 HTML 源码，请下载仓库后用浏览器打开。所有风格使用同一份虚构简历便于比较；头像为原创几何占位图，人物、组织、学校、时间和成果均为虚构。
 
-| 中文桌面网页 | English desktop |
-| --- | --- |
-| ![完全虚构的中文桌面简历](docs/images/desktop.zh-CN.png) | ![Entirely fictional English desktop resume](docs/images/desktop.en.png) |
+![前六套风格的中英文桌面比较](docs/images/gallery/desktop-1.png)
+![后六套风格的中英文桌面比较](docs/images/gallery/desktop-2.png)
 
-| 移动端 | A4 PDF（第 1 页） |
-| --- | --- |
-| <img src="docs/images/mobile.zh-CN.png" alt="完全虚构的移动端简历" width="300"> | <img src="docs/images/pdf.zh-CN.page-1.png" alt="完全虚构的 A4 简历第一页" width="440"> |
+| 风格 / 规范 | 中文网页 / PDF | English web / PDF |
+| --- | --- | --- |
+| [Apple](references/styles/apple/DESIGN.md) `apple` | [HTML](examples/preview/styles/apple/zh-CN/index.html) · [PDF](examples/preview/styles/apple/zh-CN/resume.pdf) | [HTML](examples/preview/styles/apple/en/index.html) · [PDF](examples/preview/styles/apple/en/resume.pdf) |
+| [Google / Material 3](references/styles/google-material/DESIGN.md) `google-material` | [HTML](examples/preview/styles/google-material/zh-CN/index.html) · [PDF](examples/preview/styles/google-material/zh-CN/resume.pdf) | [HTML](examples/preview/styles/google-material/en/index.html) · [PDF](examples/preview/styles/google-material/en/resume.pdf) |
+| [Microsoft / Fluent 2](references/styles/microsoft-fluent/DESIGN.md) `microsoft-fluent` | [HTML](examples/preview/styles/microsoft-fluent/zh-CN/index.html) · [PDF](examples/preview/styles/microsoft-fluent/zh-CN/resume.pdf) | [HTML](examples/preview/styles/microsoft-fluent/en/index.html) · [PDF](examples/preview/styles/microsoft-fluent/en/resume.pdf) |
+| [IBM / Carbon](references/styles/ibm-carbon/DESIGN.md) `ibm-carbon` | [HTML](examples/preview/styles/ibm-carbon/zh-CN/index.html) · [PDF](examples/preview/styles/ibm-carbon/zh-CN/resume.pdf) | [HTML](examples/preview/styles/ibm-carbon/en/index.html) · [PDF](examples/preview/styles/ibm-carbon/en/resume.pdf) |
+| [Ant Group / Ant Design](references/styles/ant-design/DESIGN.md) `ant-design` | [HTML](examples/preview/styles/ant-design/zh-CN/index.html) · [PDF](examples/preview/styles/ant-design/zh-CN/resume.pdf) | [HTML](examples/preview/styles/ant-design/en/index.html) · [PDF](examples/preview/styles/ant-design/en/resume.pdf) |
+| [Tencent / TDesign](references/styles/tencent-tdesign/DESIGN.md) `tencent-tdesign` | [HTML](examples/preview/styles/tencent-tdesign/zh-CN/index.html) · [PDF](examples/preview/styles/tencent-tdesign/zh-CN/resume.pdf) | [HTML](examples/preview/styles/tencent-tdesign/en/index.html) · [PDF](examples/preview/styles/tencent-tdesign/en/resume.pdf) |
+| [ByteDance / Arco](references/styles/bytedance-arco/DESIGN.md) `bytedance-arco` | [HTML](examples/preview/styles/bytedance-arco/zh-CN/index.html) · [PDF](examples/preview/styles/bytedance-arco/zh-CN/resume.pdf) | [HTML](examples/preview/styles/bytedance-arco/en/index.html) · [PDF](examples/preview/styles/bytedance-arco/en/resume.pdf) |
+| [Douyin / Semi](references/styles/douyin-semi/DESIGN.md) `douyin-semi` | [HTML](examples/preview/styles/douyin-semi/zh-CN/index.html) · [PDF](examples/preview/styles/douyin-semi/zh-CN/resume.pdf) | [HTML](examples/preview/styles/douyin-semi/en/index.html) · [PDF](examples/preview/styles/douyin-semi/en/resume.pdf) |
+| [Huawei / HarmonyOS](references/styles/huawei-harmonyos/DESIGN.md) `huawei-harmonyos` | [HTML](examples/preview/styles/huawei-harmonyos/zh-CN/index.html) · [PDF](examples/preview/styles/huawei-harmonyos/zh-CN/resume.pdf) | [HTML](examples/preview/styles/huawei-harmonyos/en/index.html) · [PDF](examples/preview/styles/huawei-harmonyos/en/resume.pdf) |
+| [Baidu / Light DLS](references/styles/baidu-dls/DESIGN.md) `baidu-dls` | [HTML](examples/preview/styles/baidu-dls/zh-CN/index.html) · [PDF](examples/preview/styles/baidu-dls/zh-CN/resume.pdf) | [HTML](examples/preview/styles/baidu-dls/en/index.html) · [PDF](examples/preview/styles/baidu-dls/en/resume.pdf) |
+| [Adobe / Spectrum](references/styles/adobe-spectrum/DESIGN.md) `adobe-spectrum` | [HTML](examples/preview/styles/adobe-spectrum/zh-CN/index.html) · [PDF](examples/preview/styles/adobe-spectrum/zh-CN/resume.pdf) | [HTML](examples/preview/styles/adobe-spectrum/en/index.html) · [PDF](examples/preview/styles/adobe-spectrum/en/resume.pdf) |
+| [Salesforce / Lightning](references/styles/salesforce-lightning/DESIGN.md) `salesforce-lightning` | [HTML](examples/preview/styles/salesforce-lightning/zh-CN/index.html) · [PDF](examples/preview/styles/salesforce-lightning/zh-CN/resume.pdf) | [HTML](examples/preview/styles/salesforce-lightning/en/index.html) · [PDF](examples/preview/styles/salesforce-lightning/en/resume.pdf) |
 
-可下载完整的 [中文 PDF](examples/preview/zh-CN/resume.pdf)、[English PDF](examples/preview/en/resume.pdf)，或查看 [中文网页源码](examples/preview/zh-CN/index.html) / [English HTML](examples/preview/en/index.html)。GitHub 展示 HTML 源码，下载后用浏览器打开即可预览。
+完整桌面、移动端及每一页 PDF 截图保存在对应预览目录；[检查记录](docs/preview-checks.json)记录 24 组风格预览和 6 组职业预览的几何检查。[公共设计规则](DESIGN.md)链接到各风格的官方来源、采集日期、设计原则、排版 token 及项目改编说明。网上现成 DESIGN.md 的检索结果也在其中说明，未直接复制第三方规范。
 
-## 安装技能：推荐使用 npx
+## 安装与迁移
 
-需要 Node.js **22.20 或更高版本**及 npm。安装器使用开源的 [Vercel Skills CLI](https://github.com/vercel-labs/skills)，不需要单独发布或安装本项目的 npm 包。
-
-```bash
-# 交互式选择目标 Agent，默认安装到当前项目
-npx skills add Cliccker/apple-style-resume
-
-# 为当前项目的 Codex 安装，跳过交互选择
-npx skills add Cliccker/apple-style-resume --skill apple-style-resume -a codex -y
-
-# 安装到用户范围，供多个项目使用
-npx skills add Cliccker/apple-style-resume --skill apple-style-resume -a codex -g -y
-```
-
-仅查看可发现的技能：
+需要 Node.js 22.20+ 和 npm；通过 [Vercel Skills CLI](https://github.com/vercel-labs/skills) 安装，仓库地址保持不变：
 
 ```bash
+npx skills add Cliccker/apple-style-resume --skill brand-style-resume -a codex -y
+# 用户范围安装
+npx skills add Cliccker/apple-style-resume --skill brand-style-resume -a codex -g -y
+# 查看可发现的技能
 npx skills add Cliccker/apple-style-resume --list
-npx skills list -a codex
 ```
 
-默认使用 Codex；也可以在安装器中选择其他支持技能的 Agent。生成脚本与 Python 的使用方式相同，但本项目的技能调用验证以 Codex 为目标。
+skill 已从 `apple-style-resume` 改名为 `brand-style-resume`。原 CLI 仍兼容；旧的 `$apple-style-resume` 调用应改为 `$brand-style-resume`。若曾手工安装，备份后替换旧文件夹，不同时保留两份技能。
 
-### ZIP / 手动安装
+手工安装可以将整个仓库克隆到目标项目的 `.agents/skills/brand-style-resume`。文件夹需直接包含 `SKILL.md`、`assets`、`scripts`、`references` 和 `DESIGN.md`。不要只复制 SKILL.md。安装不会自动配置 Python、字体或 PDF 依赖。
 
-从 [Release](https://github.com/Cliccker/apple-style-resume/releases/latest) 下载 ZIP。解压后的 `apple-style-resume` 文件夹应直接包含 `SKILL.md`、`assets`、`scripts` 等文件。将整个文件夹放入项目的 `.agents/skills/`，或用户目录下的 `.agents/skills/`。已存在同名技能时，请先保留旧版本，再选择替换，避免安装重复副本。
-
-也可以手动克隆到项目中。以下命令从目标项目根目录运行。
-
-Windows PowerShell：
-
-```powershell
-New-Item -ItemType Directory -Force .agents/skills | Out-Null
-git clone https://github.com/Cliccker/apple-style-resume.git .agents/skills/apple-style-resume
-```
-
-macOS / Linux：
-
-```bash
-mkdir -p .agents/skills
-git clone https://github.com/Cliccker/apple-style-resume.git .agents/skills/apple-style-resume
-```
-
-Codex 会发现标准技能目录；若未出现，重启后再查看。安装位置依据 [OpenAI 官方技能文档](https://learn.chatgpt.com/docs/build-skills)。
-
-## 在 Codex 中使用
-
-安装后，提供你自己的 Markdown 简历、JPG/PNG 照片以及输出目录，例如：
+## 在 skill 中使用
 
 ```text
-$apple-style-resume 请用 resume.md 和 portrait.png 生成中文 Apple 风格简历，输出到 output/resume。保留 Inter 和 Noto Sans SC 字体，并导出 PDF。
+$brand-style-resume 请将 resume.pdf 编排为腾讯 TDesign 风格，输出到 output/resume，保留原文并导出 PDF。暂不使用照片。
 ```
 
 ```text
-$apple-style-resume Use resume.md and portrait.png to create an English resume in output/resume and export an A4 PDF. Use the original Inter and Noto Sans SC typography.
+$brand-style-resume Use resume.md and portrait.png to create an English IBM Carbon-inspired resume in output/resume, including a PDF.
 ```
 
-技能安装不会自动安装 Python、字体或 PDF 依赖，按下面的步骤准备即可。
+未指定风格时，skill 展示列表并询问。未提供照片时，会询问上传照片还是无照片继续；不自动生成头像。只在用户要求时翻译、上传或部署。
 
-## 字体：保持原有设计效果
+## 命令行生成
 
-**字体是设计的一部分。推荐先安装 [Inter](https://rsms.me/inter/) 和 [Noto Sans SC](https://fonts.google.com/specimen/Noto+Sans+SC)**，包括 400、500、600、700 字重；可变字体也可以。前者用于拉丁字符，后者用于简体中文。这两款是本模板的字体选择，并非 Apple 官方字体。
-
-- Windows：解压字体后右键安装；macOS：使用“字体册”；Linux：放入用户字体目录并执行 `fc-cache -f`。安装后重新打开浏览器或 PDF 导出进程。
-- 默认优先使用本地安装的两款字体，支持离线生成，不附带字体文件。
-- 若不方便安装，生成时加 `--web-fonts`，通过 Google Fonts 在线加载这两款字体。截图示例使用此方式；预览和导出时需要能够访问 Google Fonts。
-- 字体不可用时回退到系统字体，字形、换行和 PDF 页数可能变化。出现回退时应先补齐字体，再调整排版。
-
-## 命令行快速使用
-
-需要 **Python 3.10+**。HTML 生成只使用标准库，无需安装 Python 第三方依赖。以下从独立克隆的仓库根目录运行：
+Python 3.10+；HTML 生成仅使用标准库。直接运行 CLI 不询问问题，默认 Apple、中文标签、无照片。
 
 ```bash
-git clone https://github.com/Cliccker/apple-style-resume.git
-cd apple-style-resume
-
-# 中文界面，正文保持源文件语言
-python scripts/md_to_resume.py examples/resume.zh-CN.md examples/avatar.png output/zh-CN --lang zh-CN
-
-# 英文界面，按需启用在线原版字体
-python scripts/md_to_resume.py examples/resume.en.md examples/avatar.png output/en --lang en --web-fonts
+python scripts/md_to_resume.py --list-styles
+python scripts/md_to_resume.py resume.md output/resume --style ant-design
+python scripts/md_to_resume.py resume.md output/resume --style ibm-carbon --lang en --photo portrait.png
+# 原有三个位置参数保持兼容
+python scripts/md_to_resume.py resume.md portrait.png output/resume
 ```
 
-替换输入路径即可使用自己的文件。原有三个位置参数仍有效，默认中文；带空格的路径请使用引号。`--lang` 只切换标题、页脚及 HTML 语言，不翻译正文。
-
-输出目录包含：
-
-| 文件 | 用途 |
-| --- | --- |
-| `index.html` | 响应式静态网页 |
-| `resume_a4.html` | A4 打印版 HTML |
-| `photo.jpg` / `photo.jpeg` / `photo.png` | 保留格式的照片副本 |
-| `resume.pdf` | 执行下面的导出命令后生成 |
-
-用浏览器打开 HTML 即可查看。没有内容的章节自动隐藏。不同工作单位在 PDF 中另起一页，长内容自然分页，不强制限制页数。
-
-### 导出 PDF
+输出：`index.html`、`resume_a4.html`、`source.md`；提供照片时另复制为 `photo.jpg`、`photo.jpeg` 或 `photo.png`。CSS 内嵌，交付文件不依赖 skill 的安装目录。`--lang` 只改变界面标签，不翻译正文。
 
 ```bash
 python -m pip install -r requirements-pdf.txt
 python -m playwright install chromium
-python scripts/export_pdf.py output/zh-CN/resume_a4.html --output output/zh-CN/resume.pdf
-python scripts/export_pdf.py output/en/resume_a4.html --output output/en/resume.pdf
+python scripts/export_pdf.py output/resume/resume_a4.html --output output/resume/resume.pdf
 ```
 
-Linux 若缺少浏览器系统依赖，可执行 `python -m playwright install --with-deps chromium`。也可直接打开 `resume_a4.html`，使用浏览器“打印 → 另存为 PDF”：选择 A4、启用背景图形、关闭浏览器页眉页脚，保留模板的打印边距。导出前确认字体和照片加载完成，并检查每一页。
+Linux 缺少 Chromium 系统依赖时使用 Playwright 的 `install --with-deps chromium`。也可浏览器打印 A4 HTML：使用 CSS 边距、开启背景图形、关闭浏览器页眉页脚。长内容自然分页，不删文字、不强制一两页；Apple 保留后续雇主另页，其余风格连续排版。
 
-## Markdown 输入格式
+## PDF 输入：提取、视觉核对、Markdown
 
-参照 [中文完整示例](examples/resume.zh-CN.md)、[English example](examples/resume.en.md) 和 [解析说明](references/markdown-parsing.md)。
+```bash
+python -m pip install -r requirements-input.txt
+python scripts/prepare_pdf.py resume.pdf --output output/pdf-input
+```
 
-- `# 姓名`，随后是职位、可选的意向职位和联系方式。
-- `## 个人简介`、`## 工作经历`、`## 早期项目`、`## 教育背景`、`## 游戏经历`，均支持对应英文标题。
-- `### 公司 | 职位`，下一行使用斜体日期；项目用独立加粗标题，成果用列表。
-- 教育条目使用 `- **学校** | 专业 | 学位 | 年份`。
+该脚本生成逐页 `.txt`、`.png` 和 `manifest.json`，不会执行 OCR 或猜测简历结构。skill 会对照每页预览整理成可编辑 Markdown，再交给生成器。双栏需要恢复语义顺序；扫描页和混合页需要当前 agent 的视觉/OCR 能力。页面能提取文字，也必须核对图片中的额外内容。
 
-这是结构化简历格式，不是通用 Markdown 排版器；不支持任意 HTML、表格和复杂内联格式。实际生成会保留你提供的个人信息，不会自动脱敏或上传。
+无法确认的姓名、日期、数字等信息会向用户追问。缺少视觉/OCR 能力时会明确说明并请求可读源文件。纯 CLI 不能独立完成扫描件识别。详见 [PDF 工作流](references/pdf-input.md)；[四类虚构输入样本](examples/pdf-input)附正确 Markdown，可用于练习和测试。
 
-## Apple 设计风格来源
+## Markdown、字体和样本
 
-| 官方参考 | 本项目的借鉴方式 |
-| --- | --- |
-| [Human Interface Guidelines — Typography](https://developer.apple.com/design/human-interface-guidelines/typography) | 用字号、字重和文本层级组织内容 |
-| [Human Interface Guidelines — Layout](https://developer.apple.com/design/human-interface-guidelines/layout) | 建立稳定的对齐、留白和信息分组 |
-| [Human Interface Guidelines — Color](https://developer.apple.com/design/human-interface-guidelines/color) | 使用克制的颜色区分内容与交互 |
-| [Apple Mac 产品页面](https://www.apple.com/mac/) | 观察简洁排版、卡片和大面积留白的视觉表达 |
+输入格式见 [解析说明](references/markdown-parsing.md)。支持简介、经历、教育、技能、独立项目、证书、奖项、出版物及自定义章节；重复章节保留顺序。任意 HTML、复杂表格和嵌套 Markdown 应由 skill 在工作副本中转为可读结构，不执行源 HTML。
 
-具体色值、字体组合、圆角和阴影是本项目的设计选择，详见 [DESIGN.md](DESIGN.md)，不是 Apple 规定的简历规范。本项目独立开发，与 Apple 无隶属关系，不包含 Apple 标志、专有字体或官网截图。
+字体默认本地加载，缺少时按每套规范回退，可能改变换行和分页。Apple 保留 [Inter](https://rsms.me/inter/) / [Noto Sans SC](https://fonts.google.com/specimen/Noto+Sans+SC) 字体栈；Carbon 使用 IBM Plex Sans，Material 使用 Roboto，其他详见各自 DESIGN.md。可选 `--web-fonts` 加载该风格的开源在线字体；导出前应等待字体与照片就绪。不捆绑专有字体或公司标志。
 
-## 开发验证
+新增 [12 份职业 Markdown](examples/profiles)，对应 6 位虚构人物的中英文版本。另有 [职业预览](examples/preview/careers)：应届生、前端、后端、产品、设计、数据；包含无经历、多雇主、长文本、长链接和未知章节。[6 个公开来源与样本溯源](references/sample-sources.md)仅作为结构参考，未复制真实履历和个人信息。实际用户输入及输出不会自动脱敏。
+
+## 开发与验证
 
 ```bash
 python -m unittest discover -s tests -v
+# 重建示例需开发依赖及 Chromium
+python -m pip install -r requirements-dev.txt
+python -m playwright install chromium
+python scripts/build_pdf_fixtures.py
+python scripts/build_previews.py
 ```
 
-公开示例均为从零创建的虚构内容，发布包不包含真实简历、照片、旧 Git 历史或开发机资料。GitHub 账号和仓库标识作为发布所需信息保留。
+PDF 输入测试在缺少可选依赖时跳过；安装 `requirements-input.txt` 后会执行全部输入测试。原有 8 项测试保留，新增测试覆盖全风格内容一致性、额外章节、无照片、安全链接、PDF 图片内容与旧命令兼容。视觉和 OCR 核对结果见 [验证记录](docs/validation.md)。

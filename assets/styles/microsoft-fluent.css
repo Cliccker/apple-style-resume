@@ -1,0 +1,16 @@
+/* Resume adaptation. See references/styles/microsoft-fluent/DESIGN.md */
+:root {
+    --bg-primary: #F5F5F5; --bg-card: #FFFFFF; --bg-secondary: #FAFAFA;
+    --text-primary: #242424; --text-secondary: #424242; --text-tertiary: #616161;
+    --accent: #0F6CBD; --accent-light: #EBF3FC; --border: rgba(0,0,0,.10);
+    --radius-lg: 8px; --radius-md: 4px; --radius-sm: 4px;
+    --card-padding: 28px; --card-gap: 16px;
+    --font-family: "Segoe UI", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 0; --section-case: none;
+    --print-text: #424242;
+}
+.header { border-left: 4px solid var(--accent); padding-left: 24px; }
+.name { font-weight: 600; }
+.resume-web .card { box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.card-section-title { font-size: 16px; }
+.resume-web .project-item { border: 1px solid var(--border); }
+.resume-pdf .section-title { border-bottom-color: var(--border); }

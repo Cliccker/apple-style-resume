@@ -1,21 +1,35 @@
-# Apple-inspired resume design
+# Brand Style Resume design
 
-Preserve the existing quiet, card-based visual language in both templates.
+Read this document and the selected style's DESIGN.md before changing visual components. These are independent resume adaptations of company design systems, not official templates or evidence of hiring preference.
 
-| Token | Value |
-| --- | --- |
-| Page / card / inset | `#FAFAFA` / `#FFFFFF` / `#F5F5F7` |
-| Primary / secondary / metadata text | `#1D1D1F` / `#86868B` / `#A1A1A6` |
-| Link / badge background | `#0071E3` / `#E8F4FD` |
-| Border | `rgba(0,0,0,0.06)` |
-| Card / inset / avatar radius | `24px` / `12–18px` / `20–28px` |
-| Desktop card padding / gap | `32px` / `20px` |
-| Mobile card padding / page gutter | `22px` / `16px` |
-| Web content width | `960px` maximum |
-| A4 margins | `16mm` top/bottom, `18mm` left/right |
+## Shared rules
 
-Typography is part of the visual identity. Preserve the original font stack: `"Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif`. Recommend installing **Inter** and **Noto Sans SC** locally for faithful, offline rendering. System fonts are fallbacks, and their metrics can change line wrapping and PDF pagination. The README also offers an optional Google Fonts stylesheet. Do not bundle font binaries in the distribution.
+- Preserve facts, section order and source language. Hide empty sections, retain unfamiliar headings and never shorten content to meet a page count.
+- Use semantic text and safe links; keep PDF text selectable. Web width is at most 960px; narrow layouts use 16px gutters. A4 margins are 16mm vertical and 18mm horizontal.
+- Name, role/contact, section, project and achievement levels must remain distinct. Minimum print body is 11.5px. Avoid fixed heights, broad break-inside rules and shrinking long resumes.
+- Use local fonts by default with documented fallbacks. Online open fonts require --web-fonts. Do not bundle proprietary fonts, company marks or screenshots.
+- Photos are optional after asking the user. Without one, the header is text-only. Reduced-motion and print disable motion.
+- Apple retains the existing Inter / Noto Sans SC stack, palette and employer page breaks. Other styles use natural employer flow. Document adaptations separately from official evidence.
 
-Keep generous whitespace, a clear name/section/body hierarchy, rounded rectangular avatars, subtle card shadows and restrained blue links. Preserve readability on narrow screens. Disable motion for reduced-motion preferences and printing. Hide sections with no content. PDFs flow across A4 pages; subsequent employers start on a new page, while long projects may continue naturally.
+## Style index
 
-These tokens are project choices inspired by Apple's visual language, not values prescribed by Apple. Reference the official [Typography](https://developer.apple.com/design/human-interface-guidelines/typography), [Layout](https://developer.apple.com/design/human-interface-guidelines/layout), [Color](https://developer.apple.com/design/human-interface-guidelines/color) guidelines and the [Mac website](https://www.apple.com/mac/). This independent project is not affiliated with Apple and includes no Apple logos, screenshots or proprietary fonts.
+| CLI ID | Design reference | Implementation |
+| --- | --- | --- |
+| `apple` | [Apple](references/styles/apple/DESIGN.md) | [CSS](assets/styles/apple.css) |
+| `google-material` | [Google / Material 3](references/styles/google-material/DESIGN.md) | [CSS](assets/styles/google-material.css) |
+| `microsoft-fluent` | [Microsoft / Fluent 2](references/styles/microsoft-fluent/DESIGN.md) | [CSS](assets/styles/microsoft-fluent.css) |
+| `ibm-carbon` | [IBM / Carbon](references/styles/ibm-carbon/DESIGN.md) | [CSS](assets/styles/ibm-carbon.css) |
+| `ant-design` | [Ant Group / Ant Design](references/styles/ant-design/DESIGN.md) | [CSS](assets/styles/ant-design.css) |
+| `tencent-tdesign` | [Tencent / TDesign](references/styles/tencent-tdesign/DESIGN.md) | [CSS](assets/styles/tencent-tdesign.css) |
+| `bytedance-arco` | [ByteDance / Arco](references/styles/bytedance-arco/DESIGN.md) | [CSS](assets/styles/bytedance-arco.css) |
+| `douyin-semi` | [Douyin / Semi](references/styles/douyin-semi/DESIGN.md) | [CSS](assets/styles/douyin-semi.css) |
+| `huawei-harmonyos` | [Huawei / HarmonyOS](references/styles/huawei-harmonyos/DESIGN.md) | [CSS](assets/styles/huawei-harmonyos.css) |
+| `baidu-dls` | [Baidu / Light DLS](references/styles/baidu-dls/DESIGN.md) | [CSS](assets/styles/baidu-dls.css) |
+| `adobe-spectrum` | [Adobe / Spectrum](references/styles/adobe-spectrum/DESIGN.md) | [CSS](assets/styles/adobe-spectrum.css) |
+| `salesforce-lightning` | [Salesforce / Lightning](references/styles/salesforce-lightning/DESIGN.md) | [CSS](assets/styles/salesforce-lightning.css) |
+
+The machine-readable style index is [assets/styles.json](assets/styles.json). Styles share content rendering, not identical visual composition. Desktop label grids, header treatments, project containers and typographic hierarchy are specified per style. Light themes only; no company logos or dark-mode variants are included.
+
+## Existing DESIGN.md discovery
+
+Checked 2026-10-26: [DesignMD Apple](https://www.designmd.co/d/apple), [Apple HIG catalog](https://designmd.app/library/apple-hig), [Fluent acrylic catalog](https://designmd.app/library/acrylic-fluent). These are community interpretations, not official company specifications. No content was copied: generic acrylic guidance is not appropriate for a resume, and a community document's availability alone does not establish redistribution rights. Official sources remain the basis of each adaptation.

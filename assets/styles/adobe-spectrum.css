@@ -1,0 +1,17 @@
+/* Resume adaptation. See references/styles/adobe-spectrum/DESIGN.md */
+:root {
+    --bg-primary: #FAFAFA; --bg-card: #FFFFFF; --bg-secondary: #F3F3F3;
+    --text-primary: #222222; --text-secondary: #464646; --text-tertiary: #626262;
+    --accent: #1473E6; --accent-light: #EAF2FF; --border: rgba(0,0,0,.10);
+    --radius-lg: 4px; --radius-md: 4px; --radius-sm: 4px;
+    --card-padding: 28px; --card-gap: 16px;
+    --font-family: "Source Sans 3", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 0; --section-case: none;
+    --print-text: #464646;
+}
+.resume-web .header { border-bottom: 2px solid var(--text-primary); padding-bottom: 28px; }
+.resume-web .name { font-size: 44px; font-weight: 700; }
+.resume-web .card { box-shadow: none; background: transparent; border: 0; border-bottom: 1px solid var(--border); padding-left: 0; padding-right: 0; }
+.card-section-title { font-size: 20px; color: var(--text-primary); font-weight: 700; }
+.resume-web .project-item { background: transparent; padding: 0 0 12px; border-bottom: 1px solid var(--border); }
+.resume-pdf .section-title { font-weight: 700; border-bottom: 1px solid var(--text-primary); }
+@media (max-width: 600px) { .resume-web .name { font-size: 32px; } }
