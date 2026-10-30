@@ -7,3 +7,4 @@ output/
 dist/
 .agents/
 skills-lock.json
+.workbuddy/
