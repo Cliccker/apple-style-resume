@@ -62,9 +62,6 @@
             width: 5px; height: 5px; border-radius: 50%; background: #C1C1C6;
         }
 
-        /* Page break for second+ company */
-        .page-break { page-break-before: always; }
-
         /* Early Work */
         .early-grid { display: flex; gap: 20px; flex-wrap: wrap; }
         .early-item { flex: 1; min-width: 220px; }
@@ -171,6 +168,10 @@ body, .header-info, .exp-company-role, .generic-block { overflow-wrap: anywhere;
     --print-text: #525252;
 }
 /* Existing Apple-inspired component layout is retained. */
+.resume-pdf[data-style="apple"] .resume-section { margin-top: 12px; }
+.resume-pdf[data-style="apple"] .section-title { margin-bottom: 8px; }
+.resume-pdf[data-style="apple"] .project { padding: 8px 12px; }
+.resume-pdf[data-style="apple"] .exp-block:not(:last-child) { margin-bottom: 14px; }
 </style>
 </head>
 <body class="resume-pdf" data-style="apple">
@@ -186,7 +187,7 @@ body, .header-info, .exp-company-role, .generic-block { overflow-wrap: anywhere;
 
     <section class="resume-section card" data-section="profile"><h2 class="section-title">Profile</h2><p class="profile-text">This is an entirely fictional resume. All organizations, projects, dates and results are invented for demonstration. Focused on clear information, thoughtful interaction and dependable delivery, using prototypes and observable results to guide product decisions.</p></section>
 <section class="resume-section card" data-section="experience"><h2 class="section-title">Experience</h2><div class="experience-list"><div class="exp-block"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">Example Design Studio A</span><span class="exp-role-tag"> · Product Engineer</span></div><span class="exp-date">2023.04 - 2025.08 (fictional)</span></div><p class="exp-overview">Contributed to requirements, interface design and implementation for a fictional collaboration product.</p><div class="project-list"><div class="project"><div class="project-title">Demo Project: Lightweight Workspace <span class="project-meta">(Prototype / Web / Design System)</span></div><div class="project-body"><ul><li>Combined 6 simulated task types into one workspace to reduce repeated navigation.</li><li>Created 12 reusable interface components for forms, status messages and content cards.</li><li>Reduced a fictional task flow from 8 steps to 5 in a simulated evaluation.</li></ul></div></div><div class="project"><div class="project-title">Demo Project: Reading Space <span class="project-meta">(Responsive / Accessibility)</span></div><div class="project-body"><ul><li>Designed desktop and mobile reading layouts with clear heading and body hierarchy.</li><li>Supported keyboard navigation, empty states and reduced-motion preferences.</li></ul></div></div></div></div>
-<div class="exp-block page-break"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">Example Product Team B</span><span class="exp-role-tag"> · Frontend Engineer</span></div><span class="exp-date">2021.07 - 2023.03 (fictional)</span></div><p class="exp-overview">Built prototype pages around fictional scenarios and refined their interactions. Documented example components to support design and development collaboration.</p><div class="project-list"><div class="project"><div class="project-title">Demo Project: Component Gallery <span class="project-meta">(HTML / CSS / JavaScript)</span></div><div class="project-body"><ul><li>Organized 10 fictional page examples with consistent spacing, corners and states.</li><li>Added clear action feedback and readable error messages to demonstration flows.</li></ul></div></div></div></div></div></section>
+<div class="exp-block"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">Example Product Team B</span><span class="exp-role-tag"> · Frontend Engineer</span></div><span class="exp-date">2021.07 - 2023.03 (fictional)</span></div><p class="exp-overview">Built prototype pages around fictional scenarios and refined their interactions. Documented example components to support design and development collaboration.</p><div class="project-list"><div class="project"><div class="project-title">Demo Project: Component Gallery <span class="project-meta">(HTML / CSS / JavaScript)</span></div><div class="project-body"><ul><li>Organized 10 fictional page examples with consistent spacing, corners and states.</li><li>Added clear action feedback and readable error messages to demonstration flows.</li></ul></div></div></div></div></div></section>
 <section class="resume-section card" data-section="early"><h2 class="section-title">Early Projects &amp; Patents</h2><div class="early-list early-grid"><div class="early-item"><div class="early-content"><div class="early-title">Example Information Board（2020）</div><div class="early-detail">Explored grouping and chart layouts with invented data.</div></div></div><div class="early-item"><div class="early-content"><div class="early-title">Example Typography Study（2021）</div><div class="early-detail">Compared reading rhythm across type sizes and line spacing.</div></div></div></div></section>
 <section class="resume-section card" data-section="education"><h2 class="section-title">Education</h2><div class="edu-list edu-grid"><div class="edu-item"><div class="edu-content"><div class="edu-school">Example College (fictional)</div><div class="edu-detail">Computing and Interaction Design · Bachelor · 2021</div></div></div></div></section>
 <section class="resume-section card" data-section="gaming"><h2 class="section-title">Gaming Experience</h2><div class="gaming-list gaming-grid"><div class="gaming-item"><div class="gaming-platform">Demo Platform (fictional)</div><div class="gaming-games">Example Exploration Game (40 hours (fictional)), Example Strategy Game (25 hours (fictional))</div></div></div></section>

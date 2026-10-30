@@ -9,3 +9,7 @@
     --print-text: #525252;
 }
 /* Existing Apple-inspired component layout is retained. */
+.resume-pdf[data-style="apple"] .resume-section { margin-top: 12px; }
+.resume-pdf[data-style="apple"] .section-title { margin-bottom: 8px; }
+.resume-pdf[data-style="apple"] .project { padding: 8px 12px; }
+.resume-pdf[data-style="apple"] .exp-block:not(:last-child) { margin-bottom: 14px; }

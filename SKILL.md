@@ -49,7 +49,7 @@ python -m playwright install chromium
 python scripts/export_pdf.py output/resume_a4.html --output output/resume.pdf
 ```
 
-Alternatively print the A4 HTML with CSS margins, background graphics on and browser headers/footers off. Allow long content to flow without truncation or over-shrinking. Apple retains employer page breaks; other styles flow naturally.
+Alternatively print the A4 HTML with CSS margins, background graphics on and browser headers/footers off. Allow long content to flow without truncation or over-shrinking. All styles use natural employer flow without forced page breaks between companies.
 
 ## Verify and deliver
 

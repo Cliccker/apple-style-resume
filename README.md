@@ -76,7 +76,7 @@ python -m playwright install chromium
 python scripts/export_pdf.py output/resume/resume_a4.html --output output/resume/resume.pdf
 ```
 
-Linux 缺少 Chromium 系统依赖时使用 Playwright 的 `install --with-deps chromium`。也可浏览器打印 A4 HTML：使用 CSS 边距、开启背景图形、关闭浏览器页眉页脚。长内容自然分页，不删文字、不强制一两页；Apple 保留后续雇主另页，其余风格连续排版。
+Linux 缺少 Chromium 系统依赖时使用 Playwright 的 `install --with-deps chromium`。也可浏览器打印 A4 HTML：使用 CSS 边距、开启背景图形、关闭浏览器页眉页脚。所有风格的工作经历连续排版，页面填满后自然分页，不删文字、不强制一两页。
 
 ## PDF 输入：提取、视觉核对、Markdown
 
@@ -105,3 +105,7 @@ python -m playwright install chromium
 python scripts/build_pdf_fixtures.py
 python scripts/build_previews.py
 ```
+
+## 社区
+
+欢迎加入 [LINUX DO](https://linux.do/) 社区，一个「新的理想型社区」。

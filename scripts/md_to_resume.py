@@ -435,8 +435,8 @@ def _render(data: dict, lang: str, photo: str, pdf: bool, web_fonts: bool, style
     values["CONTACT_LINE"] = '<span class="divider">|</span>'.join(contacts)
 
     experiences = []
-    for index, exp in enumerate(data["experiences"]):
-        outer = "exp-block" + (" page-break" if index and style == 'apple' else "") if pdf else "exp-item"
+    for exp in data["experiences"]:
+        outer = "exp-block" if pdf else "exp-item"
         role_class = "exp-role-tag" if pdf else "exp-role-inline"
         role_text = (" · " if pdf and exp["role"] else "") + exp["role"]
         body = (f'<div class="{outer}"><div class="exp-header"><div class="exp-company-role">'

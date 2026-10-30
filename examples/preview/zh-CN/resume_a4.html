@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>示例候选人 - 产品工程师</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap">
+
     <style>
         @page { size: A4; margin: 1.6cm 1.8cm; }
 
@@ -62,9 +62,6 @@
             width: 5px; height: 5px; border-radius: 50%; background: #C1C1C6;
         }
 
-        /* Page break for second+ company */
-        .page-break { page-break-before: always; }
-
         /* Early Work */
         .early-grid { display: flex; gap: 20px; flex-wrap: wrap; }
         .early-item { flex: 1; min-width: 220px; }
@@ -94,8 +91,90 @@
         .exp-header, .project-title { break-after: avoid; }
         .project-body li, .edu-item, .early-item, .gaming-item { break-inside: avoid; }
     </style>
+    <style>/* Shared reading and print rules; brand styles follow this sheet. */
+:root {
+    --font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    --card-padding: 32px;
+    --card-gap: 20px;
+    --section-size: 13px;
+    --section-tracking: 1.5px;
+    --section-case: uppercase;
+    --section-color: var(--text-tertiary);
+    --print-text: #525252;
+}
+body { font-family: var(--font-family); }
+body, .header-info, .exp-company-role, .generic-block { overflow-wrap: anywhere; min-width: 0; }
+.resume-web .card { padding: var(--card-padding); margin-bottom: var(--card-gap); }
+.card-section-title, .section-title {
+    font-size: var(--section-size); letter-spacing: var(--section-tracking);
+    text-transform: var(--section-case); color: var(--section-color);
+}
+.generic-block { font-size: 14px; line-height: 1.75; color: var(--text-secondary); }
+.generic-block h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin: 16px 0 6px; break-after: avoid; }
+.generic-block h3:first-child { margin-top: 0; }
+.generic-block p + p, .generic-block ul + p { margin-top: 8px; }
+.generic-block ul { padding-left: 20px; margin: 6px 0; }
+.generic-block li { margin-bottom: 4px; }
+.generic-block a { color: var(--accent); }
+.experience-list, .project-list { min-width: 0; }
+.resume-pdf .resume-section { margin-top: 24px; }
+.resume-pdf .section-title { font-size: 11px; margin-top: 0; }
+.resume-pdf .generic-block { font-size: 12px; color: var(--print-text); }
+.resume-pdf .generic-block h3 { font-size: 12.5px; }
+.resume-pdf .generic-block li { break-inside: avoid; }
+.resume-pdf .project { background: var(--bg-secondary); border-radius: var(--radius-sm); }
+.resume-pdf .name, .resume-pdf .exp-company, .resume-pdf .role-line strong { color: var(--text-primary); }
+.resume-pdf .contact-line a { color: var(--accent); }
+.resume-pdf:not([data-style="apple"]) .exp-date,
+.resume-pdf:not([data-style="apple"]) .project-meta { color: var(--text-tertiary); }
+.resume-pdf:not([data-style="apple"]) .role-line,
+.resume-pdf:not([data-style="apple"]) .contact-line,
+.resume-pdf:not([data-style="apple"]) .exp-role-tag,
+.resume-pdf:not([data-style="apple"]) .edu-detail { color: var(--text-secondary); }
+.resume-pdf:not([data-style="apple"]) .early-detail,
+.resume-pdf:not([data-style="apple"]) .gaming-games { color: var(--print-text); }
+.resume-pdf .profile-text, .resume-pdf .exp-overview, .resume-pdf .project-body { color: var(--print-text); }
+.resume-pdf .exp-header { flex-wrap: wrap; }
+.resume-pdf .exp-date { white-space: normal; }
+.resume-pdf .project-body p { margin-top: 5px; }
+.resume-pdf .early-list, .resume-pdf .edu-list { flex-direction: column; gap: 10px; }
+.resume-pdf .early-item, .resume-pdf .edu-item { min-width: 0; }
+.resume-pdf .gaming-games { display: block; }
+.resume-pdf:not([data-style="apple"]) .resume-section { margin-top: 12px; }
+.resume-pdf:not([data-style="apple"]) .section-title { margin-bottom: 8px; }
+.resume-pdf:not([data-style="apple"]) .project { padding: 8px 12px; }
+.resume-pdf:not([data-style="apple"]) .exp-block { margin-bottom: 14px; }
+.resume-pdf:not([data-style="apple"]) .exp-block:last-child { margin-bottom: 0; }
+@media (max-width: 600px) {
+    .resume-web .card { padding: min(var(--card-padding), 22px); }
+    .resume-web .header { flex-wrap: wrap; }
+    .resume-web .header-info { min-width: min(100%, 220px); }
+    .resume-web .exp-date { white-space: normal; }
+}
+@media print {
+    .resume-section { box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .generic-block p, .project-body p { orphans: 2; widows: 2; }
+    .avatar { box-shadow: none; }
+}
+
+/* Resume adaptation. See references/styles/apple/DESIGN.md */
+:root {
+    --bg-primary: #FAFAFA; --bg-card: #FFFFFF; --bg-secondary: #F5F5F7;
+    --text-primary: #1D1D1F; --text-secondary: #86868B; --text-tertiary: #A1A1A6;
+    --accent: #0071E3; --accent-light: #E8F4FD; --border: rgba(0,0,0,.06);
+    --radius-lg: 24px; --radius-md: 12px; --radius-sm: 12px;
+    --card-padding: 32px; --card-gap: 20px;
+    --font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; --section-tracking: 1.5px; --section-case: uppercase;
+    --print-text: #525252;
+}
+/* Existing Apple-inspired component layout is retained. */
+.resume-pdf[data-style="apple"] .resume-section { margin-top: 12px; }
+.resume-pdf[data-style="apple"] .section-title { margin-bottom: 8px; }
+.resume-pdf[data-style="apple"] .project { padding: 8px 12px; }
+.resume-pdf[data-style="apple"] .exp-block:not(:last-child) { margin-bottom: 14px; }
+</style>
 </head>
-<body>
+<body class="resume-pdf" data-style="apple">
     <!-- Header -->
     <div class="header">
         <img src="photo.png" alt="示例候选人" class="avatar">
@@ -106,34 +185,11 @@
         </div>
     </div>
 
-    <!-- START:PROFILE -->
-    <div class="section-title">个人简介</div>
-    <p class="profile-text">这是一份完全虚构的演示简历，所有组织、项目、时间和成果均为示例。关注清晰的信息表达、轻量的交互体验与可靠的工程交付，用原型和可验证的结果推进产品设计。</p>
-
-    <!-- END:PROFILE -->
-
-        <!-- START:EXPERIENCE -->
-    <div class="section-title">工作经历</div>
-    <div class="exp-block"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">示例设计工作室 A</span><span class="exp-role-tag"> · 产品工程师</span></div><span class="exp-date">2023.04 - 2025.08（虚构）</span></div><p class="exp-overview">参与虚构协作产品的需求分析、界面设计和前端实现。</p><div class="project-list"><div class="project"><div class="project-title">演示项目：轻量工作台 <span class="project-meta">(原型 / Web / 设计系统)</span></div><div class="project-body"><ul><li>将 6 类模拟任务整合为统一工作台，减少重复导航。</li><li>制作 12 个可复用界面组件，覆盖表单、状态提示和内容卡片。</li><li>在虚构测试中，将完成演示任务的步骤从 8 步缩短至 5 步。</li></ul></div></div><div class="project"><div class="project-title">演示项目：阅读空间 <span class="project-meta">(响应式 / 无障碍)</span></div><div class="project-body"><ul><li>设计桌面与移动端阅读布局，建立清晰的标题和正文层级。</li><li>为键盘导航、空状态和减少动态效果偏好提供对应体验。</li></ul></div></div></div></div>
-<div class="exp-block page-break"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">示例产品团队 B</span><span class="exp-role-tag"> · 前端开发工程师</span></div><span class="exp-date">2021.07 - 2023.03（虚构）</span></div><p class="exp-overview">根据虚构业务场景实现原型页面，完善基础交互与内容结构。 为示例组件补充使用文档，支持设计与开发协作。</p><div class="project-list"><div class="project"><div class="project-title">演示项目：组件预览台 <span class="project-meta">(HTML / CSS / JavaScript)</span></div><div class="project-body"><ul><li>组织 10 组虚构页面示例，统一间距、圆角和状态样式。</li><li>在示例流程中加入明确的操作反馈和可读的错误提示。</li></ul></div></div></div></div>
-
-    <!-- END:EXPERIENCE -->
-
-        <!-- START:EARLY -->
-    <div class="section-title">早期项目与专利</div>
-    <div class="early-grid"><div class="early-item"><div class="early-content"><div class="early-title">示例信息看板（2020）</div><div class="early-detail">使用虚构数据练习信息分组与图表布局。</div></div></div><div class="early-item"><div class="early-content"><div class="early-title">示例排版实验（2021）</div><div class="early-detail">比较不同字号与行距下的阅读节奏。</div></div></div></div>
-
-    <!-- END:EARLY -->
-
-        <!-- START:EDUCATION -->
-    <div class="section-title">教育背景</div>
-    <div class="edu-grid"><div class="edu-item"><div class="edu-content"><div class="edu-school">示例学院（虚构）</div><div class="edu-detail">计算机与交互设计 · 学士 · 2021</div></div></div></div>
-
-    <!-- END:EDUCATION -->
-
-        <!-- START:GAMING -->
-    <div class="section-title">游戏经历</div>
-    <div class="gaming-grid"><div class="gaming-item"><div class="gaming-platform">演示平台（虚构）</div><div class="gaming-games">示例探索游戏 (40 小时（虚构）), 示例策略游戏 (25 小时（虚构）)</div></div></div>
-<!-- END:GAMING -->
+    <section class="resume-section card" data-section="profile"><h2 class="section-title">个人简介</h2><p class="profile-text">这是一份完全虚构的演示简历，所有组织、项目、时间和成果均为示例。关注清晰的信息表达、轻量的交互体验与可靠的工程交付，用原型和可验证的结果推进产品设计。</p></section>
+<section class="resume-section card" data-section="experience"><h2 class="section-title">工作经历</h2><div class="experience-list"><div class="exp-block"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">示例设计工作室 A</span><span class="exp-role-tag"> · 产品工程师</span></div><span class="exp-date">2023.04 - 2025.08（虚构）</span></div><p class="exp-overview">参与虚构协作产品的需求分析、界面设计和前端实现。</p><div class="project-list"><div class="project"><div class="project-title">演示项目：轻量工作台 <span class="project-meta">(原型 / Web / 设计系统)</span></div><div class="project-body"><ul><li>将 6 类模拟任务整合为统一工作台，减少重复导航。</li><li>制作 12 个可复用界面组件，覆盖表单、状态提示和内容卡片。</li><li>在虚构测试中，将完成演示任务的步骤从 8 步缩短至 5 步。</li></ul></div></div><div class="project"><div class="project-title">演示项目：阅读空间 <span class="project-meta">(响应式 / 无障碍)</span></div><div class="project-body"><ul><li>设计桌面与移动端阅读布局，建立清晰的标题和正文层级。</li><li>为键盘导航、空状态和减少动态效果偏好提供对应体验。</li></ul></div></div></div></div>
+<div class="exp-block"><div class="exp-header"><div class="exp-company-role"><span class="exp-company">示例产品团队 B</span><span class="exp-role-tag"> · 前端开发工程师</span></div><span class="exp-date">2021.07 - 2023.03（虚构）</span></div><p class="exp-overview">根据虚构业务场景实现原型页面，完善基础交互与内容结构。 为示例组件补充使用文档，支持设计与开发协作。</p><div class="project-list"><div class="project"><div class="project-title">演示项目：组件预览台 <span class="project-meta">(HTML / CSS / JavaScript)</span></div><div class="project-body"><ul><li>组织 10 组虚构页面示例，统一间距、圆角和状态样式。</li><li>在示例流程中加入明确的操作反馈和可读的错误提示。</li></ul></div></div></div></div></div></section>
+<section class="resume-section card" data-section="early"><h2 class="section-title">早期项目与专利</h2><div class="early-list early-grid"><div class="early-item"><div class="early-content"><div class="early-title">示例信息看板（2020）</div><div class="early-detail">使用虚构数据练习信息分组与图表布局。</div></div></div><div class="early-item"><div class="early-content"><div class="early-title">示例排版实验（2021）</div><div class="early-detail">比较不同字号与行距下的阅读节奏。</div></div></div></div></section>
+<section class="resume-section card" data-section="education"><h2 class="section-title">教育背景</h2><div class="edu-list edu-grid"><div class="edu-item"><div class="edu-content"><div class="edu-school">示例学院（虚构）</div><div class="edu-detail">计算机与交互设计 · 学士 · 2021</div></div></div></div></section>
+<section class="resume-section card" data-section="gaming"><h2 class="section-title">游戏经历</h2><div class="gaming-list gaming-grid"><div class="gaming-item"><div class="gaming-platform">演示平台（虚构）</div><div class="gaming-games">示例探索游戏 (40 小时（虚构）), 示例策略游戏 (25 小时（虚构）)</div></div></div></section>
 </body>
 </html>

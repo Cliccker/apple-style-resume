@@ -9,7 +9,7 @@ Read this document and the selected style's DESIGN.md before changing visual com
 - Name, role/contact, section, project and achievement levels must remain distinct. Minimum print body is 11.5px. Avoid fixed heights, broad break-inside rules and shrinking long resumes.
 - Use local fonts by default with documented fallbacks. Online open fonts require --web-fonts. Do not bundle proprietary fonts, company marks or screenshots.
 - Photos are optional after asking the user. Without one, the header is text-only. Reduced-motion and print disable motion.
-- Apple retains the existing Inter / Noto Sans SC stack, palette and employer page breaks. Other styles use natural employer flow. Document adaptations separately from official evidence.
+- Apple retains the existing Inter / Noto Sans SC stack and palette. All styles use natural employer flow. Document adaptations separately from official evidence.
 
 ## Style index
 

@@ -74,7 +74,7 @@ python -m playwright install chromium
 python scripts/export_pdf.py output/resume/resume_a4.html --output output/resume/resume.pdf
 ```
 
-On Linux, use Playwright's `install --with-deps chromium` if browser OS dependencies are missing. Alternatively print the A4 HTML with CSS margins, background graphics enabled and browser headers/footers disabled. Content flows without truncation or forced page counts. Apple retains its employer page breaks; other styles flow continuously.
+On Linux, use Playwright's `install --with-deps chromium` if browser OS dependencies are missing. Alternatively print the A4 HTML with CSS margins, background graphics enabled and browser headers/footers disabled. All styles let employers flow continuously, starting new pages as content fills the available space, without truncation or forced page counts.
 
 ## PDF input: extract, visually review, normalize
 
@@ -103,3 +103,7 @@ python -m playwright install chromium
 python scripts/build_pdf_fixtures.py
 python scripts/build_previews.py
 ```
+
+## Community
+
+Join the [LINUX DO](https://linux.do/) community, "a new ideal community."
